@@ -5,10 +5,10 @@ public class Instrumento implements InstrumentoInterface {
 	private String sonido;
 	
 	
-	
-	public Instrumento(String sonido) {
-		this.sonido = sonido;
+	public Instrumento() {
 	}
+	
+	
 	
 
 	@Override
