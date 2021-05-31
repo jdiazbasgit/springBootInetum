@@ -1,5 +1,7 @@
 package concierto.instrumentos;
 
+import concierto.excepciones.InstrumentoRotoException;
+
 public class Instrumento implements InstrumentoInterface {
 
 	private String sonido;
@@ -12,7 +14,9 @@ public class Instrumento implements InstrumentoInterface {
 	
 
 	@Override
-	public String sonar() {
+	public String sonar() throws InstrumentoRotoException {
+		if(getSonido().equals("nada"))
+				throw new InstrumentoRotoException();
 		return getSonido();
 	}
 
