@@ -11,7 +11,7 @@ public class Trompeta extends Instrumento{
 	
 
 	@Override
-	@Value("nada")
+	@Value("tuuu, tuuu, tuu en anotaciones")
 	public void setSonido(String sonido) {
 		super.setSonido(sonido);
 	}

@@ -14,7 +14,7 @@ import concierto.instrumentos.Instrumento;
 public class HombreOrquesta implements MusicoInterface {
 	
 	@Autowired
-	@Qualifier("guitarra")
+	@Qualifier("tocameAMi")
 	private List<Instrumento> instrumentos;
 
 	@Override

@@ -13,17 +13,16 @@ public class ConciertoSolistaSpring {
 	public static void main(String[] args) {
 
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
-		Solista solista = (Solista) ctx.getBean("solista");
+		MusicoInterface solista = (MusicoInterface) ctx.getBean("solista");
 
-		HombreOrquesta hombreOrqesta = (HombreOrquesta) ctx.getBean("hombreOrquesta");
 		try {
 			solista.tocar();
-			System.out.println("------ cambio sonido -----");
-			solista.getInstrumento().setSonido("sonido cabiado");
-			System.out.println("--- hombre orquesta---");
-			hombreOrqesta.tocar();
-			System.out.println("---- solista ---");
-			solista.tocar();
+			/*
+			 * System.out.println("------ cambio sonido -----");
+			 * solista.getInstrumento().setSonido("sonido cabiado");
+			 * System.out.println("--- hombre orquesta---"); hombreOrqesta.tocar();
+			 * System.out.println("---- solista ---"); solista.tocar();
+			 */
 		} catch (InstrumentoRotoException e) {
 
 		}

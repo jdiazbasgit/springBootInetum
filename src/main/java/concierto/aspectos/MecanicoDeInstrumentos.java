@@ -12,7 +12,7 @@ import concierto.musicos.HombreOrquesta;
 import concierto.musicos.Solista;
 
 @Component
-//@Aspect
+@Aspect
 public class MecanicoDeInstrumentos {
 	
 	@Pointcut("execution(@concierto.anotaciones.Vigilante * *.*(..))")
