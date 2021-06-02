@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import lombok.AllArgsConstructor;
@@ -20,7 +22,7 @@ import lombok.Data;
 @Table(name = "datos_laborales")
 //@RestResource(path = "/datosLaborales", rel = "datoLaboral")
 @Data
-@AllArgsConstructor
+//@AllArgsConstructor
 
 public class DatoLaboral
 {
@@ -36,6 +38,7 @@ public class DatoLaboral
 	
 	@ManyToOne
 	@JoinColumn(name = "cargos_id")
+	@Fetch(FetchMode.JOIN)
 	private Cargo cargo;
 
 	

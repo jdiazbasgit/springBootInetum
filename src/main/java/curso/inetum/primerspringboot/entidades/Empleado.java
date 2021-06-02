@@ -10,6 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -17,7 +20,7 @@ import lombok.Data;
 @Table(name = "empleados")
 //@RestResource(path = "/empleados", rel = "empleado")
 @Data
-@AllArgsConstructor
+//@AllArgsConstructor
 
 public class Empleado {
 	
@@ -40,11 +43,13 @@ public class Empleado {
 
 	@ManyToOne
 	@JoinColumn(name = "datos_laborales_id")
+	@Fetch(FetchMode.JOIN)
 	private DatoLaboral datoLaboral;
 
 	
 	@ManyToOne
 	@JoinColumn(name = "datos_personales_id")
+	@Fetch(FetchMode.JOIN)
 	private DatoPersonal datoPersonal;
 
 

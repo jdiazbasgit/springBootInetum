@@ -16,7 +16,7 @@ import lombok.Data;
 @Table(name="cargos")
 @RestResource(path = "/cargos", rel = "cargo")
 @Data
-@AllArgsConstructor
+//@AllArgsConstructor
 
 public class Cargo {
 	
