@@ -14,11 +14,13 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.JoinFormula;
 import org.hibernate.annotations.ManyToAny;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import lombok.Data;
 
 @Entity
 @Table(name = "datos_personales")
+@RestResource(path = "/datosPersonales", rel = "datoPersonal")
 @Data
 public class DatoPersonal {
 	

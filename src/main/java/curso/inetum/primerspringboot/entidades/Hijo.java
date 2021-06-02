@@ -8,11 +8,14 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.springframework.data.rest.core.annotation.RestResource;
+
 import lombok.Data;
 
 @Entity
 @Table(name = "hijos")
 @Data
+@RestResource(path = "/hijos", rel = "hijo")
 public class Hijo {
 	
 	@Id

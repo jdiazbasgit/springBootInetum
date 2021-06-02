@@ -10,28 +10,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import curso.inetum.primerspringboot.entidades.Empleado;
-import curso.inetum.primerspringboot.repositorios.EmpleadoCrudRepository;
+import curso.inetum.primerspringboot.entidades.Hijo;
+import curso.inetum.primerspringboot.repositorios.HijoCrudRepository;
 import lombok.Data;
 
 @RestController
 @Data
 @RequestMapping("/api")
-public class EmpleadosRestController {
+public class HijosRestController {
 	
 	@Autowired
-	private EmpleadoCrudRepository repository;
+	private HijoCrudRepository repository;
 	
-	@GetMapping("empleadosMio")
-	public Iterable<Empleado> empleados(){
+	@GetMapping("/getChicos/{chicos}")
+	public List<Hijo> getChicos(@PathVariable int chicos){
 		
-		return getRepository().findAll();
+		return getRepository().getChicos(chicos);
 		
 	}
 	
-	@GetMapping("/empleadosByName/{name}")
-	public List<Empleado> getEmpleadosByyName(@PathVariable String name){
-		
-		return getRepository().getEmpleadosByName(name);
-	}
+	
 
 }

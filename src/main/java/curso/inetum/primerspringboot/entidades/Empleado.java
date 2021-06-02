@@ -12,13 +12,13 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.springframework.data.rest.core.annotation.RestResource;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Entity
 @Table(name = "empleados")
-//@RestResource(path = "/empleados", rel = "empleado")
+@RestResource(path = "/empleados", rel = "empleado")
 @Data
 //@AllArgsConstructor
 

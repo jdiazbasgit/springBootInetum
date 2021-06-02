@@ -20,7 +20,7 @@ import lombok.Data;
 
 @Entity
 @Table(name = "datos_laborales")
-//@RestResource(path = "/datosLaborales", rel = "datoLaboral")
+@RestResource(path = "/datosLaborales", rel = "datoLaboral")
 @Data
 //@AllArgsConstructor
 
