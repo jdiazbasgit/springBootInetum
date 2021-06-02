@@ -3,3 +3,13 @@ spring:
     view:
       suffix: .jsp
       prefix: /WEB-INF/views/
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://188.127.169.9:3306/empleados?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: curso
+    password: Cursocurso1;
+  jpa:
+    database-platform: org.hibernate.MySQLDialect
+    show-sql: true
+    hibernate:
+      use-new-id-generator-mappings: false
