@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import curso.inetum.primerspringboot.entidades.Empleado;
 import curso.inetum.primerspringboot.entidades.Hijo;
 
 public interface HijoCrudRepository extends CrudRepository<Hijo,Integer> {
