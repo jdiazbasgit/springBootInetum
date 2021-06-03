@@ -7,9 +7,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
 	
 	
-	@GetMapping("/")
+	@GetMapping(value = {"/","login"})
 	public String home() {
-		return "home";
+		return "login";
+	}
+	
+	@GetMapping("acceso")
+	public String acceso() {
+		return "acceso";
+	}
+	
+	//@GetMapping("logout")
+	public String logout() {
+		return "login";
 	}
 
 }
