@@ -1,6 +1,9 @@
 package curso.inetum.primerspringboot.controladores;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.Resources;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,14 +22,26 @@ public class CargoRestController {
 	private CargoCrudRepository repository;
 	
 	@GetMapping("cargosMio")
-	public Iterable<Cargo> cargosMio(){
-		return getRepository().findAll();
+	public Resources<Cargo> cargosMio(){
+		
+		Iterable<Cargo> cargos=getRepository().findAll();
+		for (Cargo cargo : cargos) {
+			
+			cargo.add(ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(CargoRestController.class).geCargoById(cargo.getIdCargo())).withSelfRel());
+			
+		}
+		
+		return new Resources<Cargo>(cargos);
 	}
 	
 	@GetMapping("/cargoMio/{id}")
-	public Cargo geCargoById(@PathVariable int id){
+	public Resource<Cargo> geCargoById(@PathVariable int id){
 		
-		return getRepository().findById(id).get();
+		Cargo cargo= getRepository().findById(id).get();
+		
+		cargo.add(ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(CargoRestController.class).geCargoById(id)).withSelfRel());
+		
+		return new Resource<Cargo>(cargo);
 	}
 	
 	

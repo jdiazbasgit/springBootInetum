@@ -28,17 +28,18 @@ public class DatosLaboralesRestController {
 		
 		Iterable<DatoLaboral> datosLaborales=getRepository().findAll();
 		for (DatoLaboral datoLaboral : datosLaborales) {
-			datoLaboral.add(linkTo(methodOn(CargoRestController.class).geCargoById(datoLaboral.getCargo().getId())).withRel("cargo"));
+			datoLaboral.add(linkTo(methodOn(CargoRestController.class).geCargoById(datoLaboral.getCargo().getIdCargo())).withRel("cargo"));
+			datoLaboral.add(linkTo(methodOn(DatosLaboralesRestController.class).getDatoLaboralById(datoLaboral.getIdDatoLaboral())).withSelfRel());
 		}
 		
-		return new Resources<DatoLaboral>(datosLaborales, linkTo(methodOn(DatosLaboralesRestController.class).datosLaborales()).withSelfRel());
+		return new Resources<DatoLaboral>(datosLaborales);
 		
 	}
 	
 	@GetMapping("/datoLaboralMio/{id}")
 	public Resource<DatoLaboral> getDatoLaboralById(@PathVariable int id){
 		DatoLaboral datoLaboral=getRepository().findById(id).get();
-		datoLaboral.add(linkTo(methodOn(CargoRestController.class).geCargoById(datoLaboral.getCargo().getId())).withRel("cargo"));
+		datoLaboral.add(linkTo(methodOn(CargoRestController.class).geCargoById(datoLaboral.getCargo().getIdCargo())).withRel("cargo"));
 		datoLaboral.add(linkTo(methodOn(DatosLaboralesRestController.class).getDatoLaboralById(id)).withSelfRel());
 
 		return new Resource<DatoLaboral>(datoLaboral);

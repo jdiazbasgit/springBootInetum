@@ -28,12 +28,12 @@ public class DatosPersonalesRestController {
 		
 		Iterable<DatoPersonal> datosPersonales=getRepository().findAll();
 		for (DatoPersonal datoPersonal : datosPersonales) {
-			datoPersonal.add(linkTo(methodOn(HijosRestController.class).getHijoById(datoPersonal.getHijo().getId())).withRel("hijo"));
+			datoPersonal.add(linkTo(methodOn(HijosRestController.class).getHijoById(datoPersonal.getHijo().getIdHijo())).withRel("hijo"));
 			datoPersonal.add(linkTo(methodOn(DatosPersonalesRestController.class).getDatoPersonalById(datoPersonal.getIdDatoPersonal())).withSelfRel());
 
 		}
 		
-		return new Resources<DatoPersonal>(datosPersonales,linkTo(methodOn(HijosRestController.class)).withSelfRel()); 
+		return new Resources<DatoPersonal>(datosPersonales); 
 		
 	}
 	
@@ -41,8 +41,8 @@ public class DatosPersonalesRestController {
 	public Resource<DatoPersonal> getDatoPersonalById(@PathVariable int id){
 		
 		DatoPersonal datoPersonal= getRepository().findById(id).get();
-		datoPersonal.add(linkTo(methodOn(HijosRestController.class).getHijoById(datoPersonal.getHijo().getId())).withRel("hijo"));
-		
+		datoPersonal.add(linkTo(methodOn(HijosRestController.class).getHijoById(datoPersonal.getHijo().getIdHijo())).withRel("hijo"));
+		datoPersonal.add(linkTo(methodOn(DatosPersonalesRestController.class).getDatoPersonalById(datoPersonal.getIdDatoPersonal())).withSelfRel());
 		return new Resource<DatoPersonal>(datoPersonal);
 	}
 
