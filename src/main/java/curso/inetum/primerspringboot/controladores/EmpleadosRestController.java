@@ -4,11 +4,14 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 import java.util.List;
+import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,6 +46,11 @@ public class EmpleadosRestController {
 		
 	}
 	
+	@GetMapping("empleadosOrdenados")
+	public TreeSet<Empleado> empleadosOrdenados(){
+		return getRepository().getEmpleados();
+	}
+	
 	
 	@GetMapping("empleadosMioPaginadoHateoas/{numero}/{cantidad}")
 	public Resources<Empleado> empleadosPaginado(@PathVariable int numero,@PathVariable  int cantidad){
@@ -59,9 +67,11 @@ public class EmpleadosRestController {
 		return new Resources<Empleado>(empleados,linkTo(methodOn(EmpleadosRestController.class).empleados()).withSelfRel());
 		
 	}
-	@GetMapping("empleadosMioPaginados/{pagina}/{cantidad}")
-	public Resource<Page<Empleado>> getEmpleadosPaginados(@PathVariable  int pagina, @PathVariable  int cantidad){
-		Page<Empleado> empleados=getRepository().findAll(PageRequest.of(pagina, cantidad));
+	@GetMapping("empleadosMioPaginados/{pagina}/{cantidad}/{orden}")
+	public Resource<Page<Empleado>> getEmpleadosPaginados(@PathVariable  int pagina, @PathVariable  int cantidad, @PathVariable String orden){
+		Sort sort= Sort.by(Order.desc(orden));
+		
+		Page<Empleado> empleados=getRepository().findAll(PageRequest.of(pagina, cantidad,sort));
 		for (Empleado empleado : empleados.getContent()) {
 			empleado.add(linkTo(methodOn(DatosLaboralesRestController.class).
 					getDatoLaboralById(empleado.getDatoLaboral().getIdDatoLaboral())).withRel("datoLaboral"));
@@ -76,11 +86,7 @@ public class EmpleadosRestController {
 	
 	
 	
-	@GetMapping("/empleadosByName/{name}")
-	public List<Empleado> getEmpleadosByyName(@PathVariable String name){
-		
-		return getRepository().getEmpleadosByName(name);
-	}
+	
 	@GetMapping("/empleadosMio/{id}")
 	public Resource<Empleado> getEmpleadosByyId(@PathVariable int id){
 		Empleado empleado=getRepository().findById(id).get();

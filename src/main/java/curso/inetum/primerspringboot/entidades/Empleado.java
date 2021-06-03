@@ -24,7 +24,7 @@ import lombok.Data;
 @Data
 //@AllArgsConstructor
 
-public class Empleado extends ResourceSupport{
+public class Empleado extends ResourceSupport implements Comparable<Empleado>{
 	
 
 
@@ -54,6 +54,13 @@ public class Empleado extends ResourceSupport{
 	@JoinColumn(name = "datos_personales_id")
 	@Fetch(FetchMode.JOIN)
 	private DatoPersonal datoPersonal;
+
+
+	@Override
+	public int compareTo(Empleado otro) {
+		// TODO Auto-generated method stub
+		return getFechaNacimiento().compareTo(otro.getFechaNacimiento());
+	}
 
 
 	
