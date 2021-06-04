@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import lombok.Data;
 
@@ -25,12 +26,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		//http.authorizeRequests().antMatchers("/api").permitAll();
-		http.authorizeRequests().antMatchers("/login").permitAll();
-		http.authorizeRequests().antMatchers("/api/empleados").access("ROLE_ADMIN");
+		//http.authorizeRequests().antMatchers("/login").permitAll();
+		//http.authorizeRequests().antMatchers("/api/empleados").access("ROLE_ADMIN");
+		http.authorizeRequests().antMatchers("/user").permitAll();
+		http.addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
 		http.authorizeRequests().anyRequest().authenticated();
-		http.formLogin().usernameParameter("usuario").passwordParameter("clave");
-		http.formLogin().loginPage("/login").loginProcessingUrl("/autenticar").defaultSuccessUrl("/acceso").failureUrl("/login?error=usuario no existe");
-		http.logout().logoutSuccessUrl("/login?error=esperamos verte pronto").logoutUrl("/logout");
+		//http.formLogin().usernameParameter("usuario").passwordParameter("clave");
+		//http.formLogin().loginPage("/login").loginProcessingUrl("/autenticar").defaultSuccessUrl("/acceso").failureUrl("/login?error=usuario no existe");
+		//http.logout().logoutSuccessUrl("/login?error=esperamos verte pronto").logoutUrl("/logout");
 		http.csrf().disable();
 		http.cors();
 	}

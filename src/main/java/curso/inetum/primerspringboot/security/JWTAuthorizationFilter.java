@@ -3,6 +3,7 @@ package curso.inetum.primerspringboot.security;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.servlet.FilterChain;
@@ -26,7 +27,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 
 	private final String HEADER = "Authorization";
 	private final String PREFIX = "Bearer ";
-	private final String SECRET = "allianz";
+	private final String SECRET = "inetum";
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
@@ -64,12 +65,15 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 		List<GrantedAuthority> authorities = new ArrayList<>();
 
 		/// (List<GrantedAuthority>) claims.get("authorities");
+		List<LinkedHashMap<Integer, String>> coleccion=(List<LinkedHashMap<Integer, String>>) claims.get("authorities");
+		
+		System.out.println((coleccion.get(0).values().toArray())[1]);
 
-		for (GrantedAuthority grantedAuthority : (List<GrantedAuthority>) claims.get("authorities")) {
+		//for (String grantedAuthority : coleccion.get(0).values()) {
 
-			GrantedAuthority rol = new SimpleGrantedAuthority(grantedAuthority.getAuthority());
+			GrantedAuthority rol = new SimpleGrantedAuthority((String) (coleccion.get(0).values().toArray())[1]);
 			authorities.add(rol);
-		}
+		//}
 
 		UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(claims.getSubject(), null,
 				authorities);
@@ -83,3 +87,5 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 			return false;
 		return true;
 	}
+
+}

@@ -1,6 +1,6 @@
 package curso.inetum.primerspringboot.entidades;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -33,6 +33,6 @@ public class Usuario {
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "authorities_users", joinColumns = @JoinColumn(name = "usuarios_id"), inverseJoinColumns = @JoinColumn(name = "authority_id"))
-	private List<Authority> authorities;
+	private Set<Authority> authorities;
 
 }
